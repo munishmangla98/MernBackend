@@ -44,7 +44,7 @@ exports.updateBlog = async (req, res) => {
 
         blog.title = title || blog.title;
         blog.content = content || blog.content;
-        
+
         // Check if author is provided and if it's a valid ObjectId
         if (author && mongoose.Types.ObjectId.isValid(author)) {
             blog.author = author;
@@ -82,5 +82,18 @@ exports.deleteBlog = async (req, res) => {
     } catch (err) {
         console.error('Error deleting blog:', err.message);
         res.status(500).send('Server Error');
+    }
+};
+
+// Controller function to get a single blog by ID
+exports.getBlogById = async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id).populate('author', 'name email');
+        if (!blog) {
+            return res.status(404).json({ error: 'Blog not found' });
+        }
+        res.status(200).json(blog);
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
     }
 };
