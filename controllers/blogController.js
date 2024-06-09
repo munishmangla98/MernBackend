@@ -20,37 +20,6 @@ exports.createBlog = async (req, res) => {
     }
 };
 
-// Update a blog
-// exports.updateBlog = async (req, res) => {
-//     const { id } = req.params;
-//     const { title, content, author } = req.body;
-
-//     try {
-//         let blog = await Blog.findById(id);
-
-//         if (!blog) {
-//             return res.status(404).json({ error: 'Blog not found' });
-//         }
-
-//         console.log('Blog author ID:', blog.author.toString());
-//         console.log('Logged in user ID:', req.user.id);
-
-//         // Check if the logged-in user is the author of the blog
-//         if (blog.author.toString() !== req.user.id) {
-//             return res.status(401).json({ error: 'Not authorized' });
-//         }
-
-//         blog.title = title || blog.title;
-//         blog.content = content || blog.content;
-//         blog.author = author || blog.author;
-
-//         await blog.save();
-//         res.json(blog);
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// };
 
 const mongoose = require('mongoose');
 
@@ -89,63 +58,6 @@ exports.updateBlog = async (req, res) => {
     }
 };
 
-
-// Delete a blog
-// exports.deleteBlog = async (req, res) => {
-//     const { id } = req.params;
-
-//     try {
-//         let blog = await Blog.findById(id);
-
-//         if (!blog) {
-//             return res.status(404).json({ error: 'Blog not found' });
-//         }
-
-//         console.log('Blog author ID:', blog.author.toString());
-//         console.log('Logged in user ID:', req.user.id);
-        
-//         // Check if the logged-in user is the author of the blog
-//         if (blog.author.toString() !== req.user.id) {
-//             return res.status(401).json({ error: 'Not authorized' });
-//         }
-
-//         await blog.remove();
-//         res.json({ msg: 'Blog removed' });
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// };
-
-
-
-// exports.deleteBlog = async (req, res) => {
-//     const { id } = req.params;
-
-//     try {
-//         let blog = await Blog.findById(id);
-
-//         if (!blog) {
-//             return res.status(404).json({ error: 'Blog not found' });
-//         }
-
-//         console.log('Blog author ID:', blog.author.toString());
-//         console.log('Logged in user ID:', req.user.id);
-
-//         // Check if the logged-in user is the author of the blog
-//         if (blog.author.toString() !== req.user.id) {
-//             console.error('Authorization failed: User is not the author of the blog');
-//             return res.status(403).json({ error: 'User is not authorized to delete this blog' });
-//         }
-
-//         await blog.remove();
-//         console.log('Blog removed:', blog);
-//         res.json({ msg: 'Blog removed' });
-//     } catch (err) {
-//         console.error('Error deleting blog:', err.message);
-//         res.status(500).send('Server Error');
-//     }
-// };
 
 exports.deleteBlog = async (req, res) => {
     const { id } = req.params;

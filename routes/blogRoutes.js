@@ -4,7 +4,7 @@ const auth = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // Get all blogs
-router.get('/', auth, getAllBlogs);
+router.get('/', getAllBlogs);
 
 // Create a new blog
 router.post('/', auth, createBlog);
@@ -15,4 +15,4 @@ router.put('/:id', auth, updateBlog);
 // Delete a blog
 router.delete('/:id', auth, deleteBlog);
 
-module.exports = router; ``
+module.exports = router; 
