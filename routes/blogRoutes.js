@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllBlogs,getBlogById, createBlog, updateBlog, deleteBlog } = require('../controllers/blogController');
+const { getAllBlogs,getBlogById, createBlog, updateBlog, deleteBlog  , searchBlogs } = require('../controllers/blogController');
 const auth = require('../middleware/authMiddleware');
 const router = express.Router();
 
@@ -17,5 +17,8 @@ router.put('/:id', auth, updateBlog);
 
 // Delete a blog
 router.delete('/:id', auth, deleteBlog);
+
+// Search blogs by title or content
+router.get('/search', searchBlogs);
 
 module.exports = router; 

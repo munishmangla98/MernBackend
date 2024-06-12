@@ -80,9 +80,20 @@ const deleteComment = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const getCommentsByBlogId = async (req, res) => {
+  const blogId = req.params.id;
 
+  try {
+      const comments = await Comment.find({ blogId });
+      res.json(comments);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+  }
+};
 module.exports = {
   addComment,
   updateComment,
   deleteComment,
+  getCommentsByBlogId,
 };

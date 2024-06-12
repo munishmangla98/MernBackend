@@ -97,3 +97,44 @@ exports.getBlogById = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
+
+
+// Search blogs by title or content
+// exports.searchBlogs = async (req, res) => {
+//     const { query } = req.query;
+//     try {
+//         const blogs = await Blog.find({
+//             $or: [
+//                 { title: { $regex: query, $options: 'i' } },
+//                 { content: { $regex: query, $options: 'i' } }
+//             ]
+//         });
+//         res.json(blogs);
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error searching blogs' });
+//     }
+// };
+exports.searchBlogs = async (req, res) => {
+    try {
+        const query = req.query.query;
+        console.log('Search query:', query); // Add this line
+
+        if (!query) {
+            return res.status(400).json({ error: 'Query parameter is required' });
+        }
+
+        const blogs = await Blog.find({
+            $or: [
+                { title: { $regex: query, $options: 'i' } },
+                { content: { $regex: query, $options: 'i' } }
+            ]
+        });
+
+        console.log('Blogs found:', blogs); // Add this line
+
+        res.json(blogs);
+    } catch (error) {
+        console.error('Error fetching blogs:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};

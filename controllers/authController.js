@@ -44,7 +44,10 @@ exports.login = async (req, res) => {
       }
   
       const token = await user.generateAuthToken();
-      res.json({ token });
+      res.json({ token,
+        _id: user._id,
+        name: user.name
+       });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
