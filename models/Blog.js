@@ -30,6 +30,10 @@ const blogSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  date:{
+    type:Date,
+    default:Date.now
+  },
   comments: [commentSchema],
 });
 
